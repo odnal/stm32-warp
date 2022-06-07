@@ -1,0 +1,22 @@
+if the st-link is down (this can be indicated by LD1 led next to the 
+usb port) LD1 will be solid red indicating the st-link is down
+
+the reset button (black push button) is what i used to recover the
+board along with an st-link utility
+
+
+normally plugging in the usb cable to the computer will have LD1 
+blink red/green indicating the link is up
+
+LD1 is solid red when it is down
+
+holding the reset button when plugging in the USB will blink LD1
+
+from there run st-flash erase 
+
+this erases the flash which is probably a factor that is halting
+the st-link because an address is being accessed and modified 
+when it should not
+
+you should then be able to openocd your way into the board along
+with gdb and load your program into memory
