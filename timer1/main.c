@@ -29,7 +29,7 @@ int main (void)
   GPIOE_AFR &= ~(0xF);  // clearing bits
   GPIOE_AFR |= 0x1u;    // 0001: AF1
 
-  while(1) {};
+  while(1);
 
   return 0;
 }
