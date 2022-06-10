@@ -15,15 +15,14 @@ void TIM1_Toggle_Init (void)
   /*
    * freq_c = current frequency (whatever the system frequency is, 80Mhz)
    * freq_t = timer frequency
-   * T_period = 1/freq_t 
+   * T_period = (1+ARR)(1/freq_t)
    * PSC = prescaler
-   * t_oveflow = desired time to reach the overflow value
    * freq_t = freq_c / PSC+1
-   * ARR = t_overflow / T_period
    * 
   */ 
-  TIM1_PSC = 0xffff; // 65535, result: freq_t = 1.2Khz
-  TIM1_ARR = 1220;  // value of which we count up to at the rate of the frequency set by the PSC
+  TIM1_PSC = 0x0; // keep frequecy at 80Mhz
+  TIM1_ARR = 99;  // value of which we count up to at the rate of the frequency set by the PSC
+  TIM1_CCR1 = 50; // duty cycle - 50% of the ARR value
   
   // Main output enable (MOE)
   TIM1_BDTR |= 1<<15;
@@ -34,7 +33,8 @@ void TIM1_Toggle_Init (void)
   ra&=(~(7<<(1<<2)));
 
   // set mode
-  ra|=( (3<<(1<<2))); // toggle mode (0011)
+  //ra|=( (3<<(1<<2))); // toggle mode (0011)
+  ra|=( (6<<(1<<2))); // pmw mode (0110)
   TIM1_CCMR1=ra;
 
   // select output polarity - active high '0' by default - commented out to prevent a little glitch at the very 

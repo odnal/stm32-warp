@@ -29,7 +29,29 @@ int main (void)
   GPIOE_AFR &= ~(0xF);  // clearing bits
   GPIOE_AFR |= 0x1u;    // 0001: AF1
 
-  while(1);
+  uint8_t intensity=0;
+  unsigned int i;
+
+  while(1) {
+    // Dimming
+    TIM1_CCR1 = 100-intensity;
+    intensity += 1;
+
+    // Brightening
+    if (intensity > 100) {
+      intensity = 0;
+      while (TIM1_CCR1 != 100) {
+        intensity += 1;
+        TIM1_CCR1 = intensity;
+        for(i=0; i<9000; i++);  // delay
+        if (TIM1_CCR1 == 100) {
+          intensity = 0;
+        } 
+      }
+    }
+
+    for (int i=0;i<9000;i++); // delay
+  }
 
   return 0;
 }
