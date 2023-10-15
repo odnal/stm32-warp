@@ -58,9 +58,9 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000021       0x21 prog.o
 
-.debug_line     0x0000000000000000       0x8e
+.debug_line     0x0000000000000000       0x8d
  .debug_line    0x0000000000000000       0x35 boot.o
- .debug_line    0x0000000000000035       0x59 prog.o
+ .debug_line    0x0000000000000035       0x58 prog.o
 
 .debug_info     0x0000000000000000       0x4c
  .debug_info    0x0000000000000000       0x26 boot.o

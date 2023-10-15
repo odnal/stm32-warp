@@ -9,9 +9,6 @@ all: boot.o prog.o final.elf
 prog.o: prog.s
 	$(CC)-as $(AFLAGS) prog.s -o prog.o
 
-#notmain.o: notmain.c
-	#$(CC)-gcc $(CFLAGS) notmain.c -o notmain.o
-
 boot.o: boot.s
 	$(CC)-as $(AFLAGS) boot.s -o boot.o
 
