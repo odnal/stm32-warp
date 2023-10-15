@@ -8,7 +8,7 @@ _start:
 
 .thumb_func
 reset:
-  bl main
+  bl notmain
   b .
 
 .globl dummy

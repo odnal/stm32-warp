@@ -1,0 +1,83 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+rom              0x0000000008000000 0x0000000000100000
+ram              0x0000000020000000 0x0000000000018000
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000008000000      0x170
+ *(.text)
+ .text          0x0000000008000000       0x10 boot.o
+                0x0000000008000000                _start
+                0x000000000800000e                dummy
+ .text          0x0000000008000010      0x160 main.o
+                0x0000000008000010                main
+
+.glue_7         0x0000000008000170        0x0
+ .glue_7        0x0000000008000170        0x0 linker stubs
+
+.glue_7t        0x0000000008000170        0x0
+ .glue_7t       0x0000000008000170        0x0 linker stubs
+
+.vfp11_veneer   0x0000000008000170        0x0
+ .vfp11_veneer  0x0000000008000170        0x0 linker stubs
+
+.v4_bx          0x0000000008000170        0x0
+ .v4_bx         0x0000000008000170        0x0 linker stubs
+
+.iplt           0x0000000008000170        0x0
+ .iplt          0x0000000008000170        0x0 boot.o
+
+.rel.dyn        0x0000000008000170        0x0
+ .rel.iplt      0x0000000008000170        0x0 boot.o
+
+.data           0x0000000020000000        0x0 load address 0x0000000008000170
+ *(.data)
+ .data          0x0000000020000000        0x0 boot.o
+ .data          0x0000000020000000        0x0 main.o
+LOAD boot.o
+LOAD main.o
+OUTPUT(final.elf elf32-littlearm)
+LOAD linker stubs
+
+.igot.plt       0x0000000020000000        0x0 load address 0x0000000008000170
+ .igot.plt      0x0000000020000000        0x0 boot.o
+
+.bss            0x0000000020000000        0x0 load address 0x0000000008000170
+ .bss           0x0000000020000000        0x0 boot.o
+ .bss           0x0000000020000000        0x0 main.o
+
+.ARM.attributes
+                0x0000000000000000       0x2f
+ .ARM.attributes
+                0x0000000000000000       0x21 boot.o
+ .ARM.attributes
+                0x0000000000000021       0x2e main.o
+
+.comment        0x0000000000000000       0x59
+ .comment       0x0000000000000000       0x59 main.o
+                                         0x5a (size before relaxing)
+
+.debug_info     0x0000000000000000       0xdc
+ .debug_info    0x0000000000000000       0xdc main.o
+
+.debug_abbrev   0x0000000000000000       0x80
+ .debug_abbrev  0x0000000000000000       0x80 main.o
+
+.debug_aranges  0x0000000000000000       0x20
+ .debug_aranges
+                0x0000000000000000       0x20 main.o
+
+.debug_line     0x0000000000000000      0x10e
+ .debug_line    0x0000000000000000      0x10e main.o
+
+.debug_str      0x0000000000000000      0x131
+ .debug_str     0x0000000000000000      0x131 main.o
+                                        0x165 (size before relaxing)
+
+.debug_frame    0x0000000000000000       0x2c
+ .debug_frame   0x0000000000000000       0x2c main.o
