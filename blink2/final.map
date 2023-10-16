@@ -9,33 +9,33 @@ ram              0x0000000020000000 0x0000000000018000
 Linker script and memory map
 
 
-.text           0x0000000008000000       0x5c
+.text           0x0000000008000000       0x58
  *(.text)
  .text          0x0000000008000000        0xe boot.o
                 0x0000000008000000                _start
  *fill*         0x000000000800000e        0x2 
- .text          0x0000000008000010       0x4c prog.o
+ .text          0x0000000008000010       0x48 prog.o
                 0x0000000008000010                prog
 
-.glue_7         0x000000000800005c        0x0
- .glue_7        0x000000000800005c        0x0 linker stubs
+.glue_7         0x0000000008000058        0x0
+ .glue_7        0x0000000008000058        0x0 linker stubs
 
-.glue_7t        0x000000000800005c        0x0
- .glue_7t       0x000000000800005c        0x0 linker stubs
+.glue_7t        0x0000000008000058        0x0
+ .glue_7t       0x0000000008000058        0x0 linker stubs
 
-.vfp11_veneer   0x000000000800005c        0x0
- .vfp11_veneer  0x000000000800005c        0x0 linker stubs
+.vfp11_veneer   0x0000000008000058        0x0
+ .vfp11_veneer  0x0000000008000058        0x0 linker stubs
 
-.v4_bx          0x000000000800005c        0x0
- .v4_bx         0x000000000800005c        0x0 linker stubs
+.v4_bx          0x0000000008000058        0x0
+ .v4_bx         0x0000000008000058        0x0 linker stubs
 
-.iplt           0x000000000800005c        0x0
- .iplt          0x000000000800005c        0x0 boot.o
+.iplt           0x0000000008000058        0x0
+ .iplt          0x0000000008000058        0x0 boot.o
 
-.rel.dyn        0x000000000800005c        0x0
- .rel.iplt      0x000000000800005c        0x0 boot.o
+.rel.dyn        0x0000000008000058        0x0
+ .rel.iplt      0x0000000008000058        0x0 boot.o
 
-.data           0x0000000020000000        0x0 load address 0x000000000800005c
+.data           0x0000000020000000        0x0 load address 0x0000000008000058
  *(.data)
  .data          0x0000000020000000        0x0 boot.o
  .data          0x0000000020000000        0x0 prog.o
@@ -44,10 +44,10 @@ LOAD prog.o
 OUTPUT(final.elf elf32-littlearm)
 LOAD linker stubs
 
-.igot.plt       0x0000000020000000        0x0 load address 0x000000000800005c
+.igot.plt       0x0000000020000000        0x0 load address 0x0000000008000058
  .igot.plt      0x0000000020000000        0x0 boot.o
 
-.bss            0x0000000020000000        0x0 load address 0x000000000800005c
+.bss            0x0000000020000000        0x0 load address 0x0000000008000058
  .bss           0x0000000020000000        0x0 boot.o
  .bss           0x0000000020000000        0x0 prog.o
 
@@ -58,9 +58,9 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000000000000021       0x21 prog.o
 
-.debug_line     0x0000000000000000       0x8d
+.debug_line     0x0000000000000000       0x89
  .debug_line    0x0000000000000000       0x35 boot.o
- .debug_line    0x0000000000000035       0x58 prog.o
+ .debug_line    0x0000000000000035       0x54 prog.o
 
 .debug_info     0x0000000000000000       0x4c
  .debug_info    0x0000000000000000       0x26 boot.o
