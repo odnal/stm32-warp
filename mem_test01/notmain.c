@@ -28,10 +28,12 @@ int notmain(void) {
   
 
   //PUT32(SRAM2_BASE, 0x77777777);
+  // Write to sram 
   for (ra=0; ra<SIZE; ra+=4) {
     PUT32(SRAM2_BASE+ra, ra);
   }
 
+  // read sram - green led stays lit if no incorrect reads (may flicker if there are incorrect reads)
   while (1) {
     for (ra=0; ra<SIZE; ra+=4) {
       if (GET32(SRAM2_BASE+ra) != ra) 
@@ -40,16 +42,6 @@ int notmain(void) {
         GPIOE_BSRR = 1<<(8);  // set
     }
   }
-
-
-  /*while (1) {
-    GPIOE_BSRR = 1<<(8);  // set
-    PUT32(SRAM2_BASE, 0x11111111);
-    for (ra=0; ra<0x20000; ra++) dummy(ra);
-    PUT32(SRAM2_BASE, 0x22222222);
-    GPIOE_BSRR = 1<<(24); // reset
-    for (ra=0; ra<0x20000; ra++) dummy(ra);
-  }*/
 
   return 0;
 }
