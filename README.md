@@ -1,3 +1,3 @@
-collection of stm32 samples from play and curiosity
+stm32 exmaples
 
 board used: stm32l476 discovery
