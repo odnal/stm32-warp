@@ -18,28 +18,28 @@ extern unsigned int GET32(unsigned int);
 
 int notmain(void) {
 
-  //unsigned int ra;
+  unsigned int ra;
 
-  //RCC_AHB2ENR |= 1<<4; // GPIOE port clock enable
-  //ra=GPIOE_MODER;
-  //ra&=(~(3<<(8<<1))); 
-  //ra|=( (1<<(8<<1))); 
-  //GPIOE_MODER=ra;
+  RCC_AHB2ENR |= 1<<4; // GPIOE port clock enable
+  ra=GPIOE_MODER;
+  ra&=(~(3<<(8<<1))); 
+  ra|=( (1<<(8<<1))); 
+  GPIOE_MODER=ra;
   
 
-  PUT32(SRAM2_BASE, 0x77777777);
-  //for (ra=0; ra<SIZE; ra+=4) {
-  //  PUT32(SRAM2_BASE+ra, ra);
-  //}
+  //PUT32(SRAM2_BASE, 0x77777777);
+  for (ra=0; ra<SIZE; ra+=4) {
+    PUT32(SRAM2_BASE+ra, ra);
+  }
 
-  //for (ra=0; ra<SIZE; ra+=4) {
-  //  if (GET32(SRAM2_BASE+ra) != ra) 
-  //    GPIOE_BSRR = 1<<(24); // reset
-  //  else
-  //    GPIOE_BSRR = 1<<(8);  // set
-  //}
-
-
+  while (1) {
+    for (ra=0; ra<SIZE; ra+=4) {
+      if (GET32(SRAM2_BASE+ra) != ra) 
+        GPIOE_BSRR = 1<<(24); // reset
+      else
+        GPIOE_BSRR = 1<<(8);  // set
+    }
+  }
 
 
   /*while (1) {
@@ -50,8 +50,6 @@ int notmain(void) {
     GPIOE_BSRR = 1<<(24); // reset
     for (ra=0; ra<0x20000; ra++) dummy(ra);
   }*/
-
-
 
   return 0;
 }
